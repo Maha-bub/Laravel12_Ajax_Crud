@@ -100,24 +100,42 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         $(document).ready(function() {
             $(document).on('submit', '#StudentEntry', function(e) {
                 e.preventDefault();
 
                 let myData = new FormData(this);
 
-                console.log(Object.fromEntries(myData));
-                $.ajax(
+
+                $('.error_text').text('');
+
+                $.ajax({
                     url: "{{ route('student.store') }}",
                     method: 'post',
-                    data: myData
-                )
+                    data: myData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        alert('Data saved successfully!');
+                        location.reload();
+                    },
+                    error: function(err) {
 
+                        let errors = err.responseJSON.errors;
 
-            })
+                        $.each(errors, function(key, value) {
 
-        })
+                            $('.' + key + '_error').text(value[0]);
+                        });
+                    }
+                });
+
+            });
+        });
     </script>
+
+
 
 </body>
 
