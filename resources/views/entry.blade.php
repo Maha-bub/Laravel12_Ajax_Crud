@@ -11,7 +11,7 @@
 
                <!-- Modal body -->
                <div class="modal-body">
-                   <form id="StudentEntry">
+                   <form id="StudentEntry" method="post">
 
                        @csrf
                        <div class="mb-3">
@@ -35,7 +35,7 @@
 
                <!-- Modal footer -->
                <div class="modal-footer">
-                   <button type="submit" class="btn btn-primary ">Save</button>
+                   <button type="submit" class="btn btn-primary " data-bs-dismiss="modal">Save</button>
                    <button type="button" class= "btn btn-danger" data-bs-dismiss="modal">Close</button>
                </div>
                </form>

@@ -92,24 +92,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
-    <script>
-       
-    </script>
+    <script></script>
 
     <script>
-         $.ajaxSetup({
+        $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
         $(document).ready(function() {
-            $(StudentEntry).submit(function(e) {
+            $(document).on('submit', '#StudentEntry', function(e) {
                 e.preventDefault();
-                alert('hello');
+
+                let myData = new FormData(this);
+
+                console.log(Object.fromEntries(myData));
+                $.ajax(
+                    url: "{{ route('student.store') }}",
+                    method: 'post',
+                    data: myData
+                )
+
+
             })
 
-        });
+        })
     </script>
 
 </body>

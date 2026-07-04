@@ -13,4 +13,17 @@ class StudentController extends Controller
         return view('index', compact('students'));
 
     }
+
+    public function store(Request $request)
+    {
+        // dd($request);
+
+        $student = new Student;
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->address = $request->address;
+
+        $student->save();
+        return redirect('/student');
+    }
 }
