@@ -29,6 +29,10 @@ class StudentController extends Controller
         $student->address = $request->address;
 
         $student->save();
-        return redirect('/student');
+
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Student Added Successfully'
+        ]);
     }
 }

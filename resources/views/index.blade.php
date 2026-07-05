@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -47,6 +47,11 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12">
+
+                {{-- @session('success')
+                    <div class="alert alert-seccess">{{ session('success') }}</div>
+                @endsession --}}
+                <div class="message alert alert-seccess"></div>
                 <div class="d-flex justify-content-between align-items-center">
                     <h3>About Me</h3>
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Add
@@ -62,6 +67,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Address</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,8 +78,19 @@
                                 <td>{{ $student->name }}</td>
                                 <td>{{ $student->email }}</td>
                                 <td>{{ $student->address }}</td>
+
+                                <td>
+                                    <a href="" class="btn btn-sm btn-primary">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <a href="" class="btn btn-sm btn-danger">
+                                        <i class="bi bi-archive-fill"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
+
 
 
                     </tbody>
@@ -117,8 +134,22 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        alert('Data saved successfully!');
-                        location.reload();
+
+                        $('#myModal').modal('hide');
+
+                        if (response.status === 'success') {
+                            $('.message').html(`
+                                <div class="alert alert-success">
+                                ${response.msg}
+                               </div>
+                             `);
+
+                            $('#StudentEntry')[0].reset();
+
+                            setTimeout(function() {
+                                $('.message').fadeOut(500);
+                            }, 1000);
+                        }
                     },
                     error: function(err) {
 
