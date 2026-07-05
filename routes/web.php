@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,5 @@ Route::resource('/student', StudentController::class);
 
 Route::get('notification', [NotificationController::class, 'index']);
 Route::get('notification/{type}', [NotificationController::class, 'notification'])->name("notification");
+
+Route::resource('product', ProductController::class, );
