@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -7,3 +8,10 @@ use Illuminate\Support\Facades\Route;
 // Use singular resource for a single controller. First parameter should be a string URI (no leading slash).
 Route::resource('/student', StudentController::class);
 
+
+// Route::resource('/student', StudentController::class);
+
+
+
+Route::get('notification', [NotificationController::class, 'index']);
+Route::get('notification/{type}', [NotificationController::class, 'notification'])->name("notification");
